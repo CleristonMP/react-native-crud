@@ -4,14 +4,17 @@ import {Avatar, Button, ListItem} from '@rneui/themed';
 import UsersContext from './context/UserContext';
 
 export default props => {
-  const {state} = useContext(UsersContext);
+  const {state, dispatch} = useContext(UsersContext);
 
   function confirmUserDeletion(user) {
     Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
       {
         text: 'Sim',
         onPress() {
-          console.warn('delete' + user.id);
+          dispatch({
+            type: 'deleteUser',
+            payload: user,
+          });
         },
       },
       {
