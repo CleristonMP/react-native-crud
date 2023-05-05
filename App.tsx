@@ -7,36 +7,39 @@ import {
 import UserList from './src/UserList';
 import UserForm from './src/UserForm';
 import NavBtn from './src/components/NavBtn';
+import {UsersProvider} from './src/context/UserContext';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="UserList"
-        screenOptions={screenOptions}>
-        <Stack.Screen
-          name="UserList"
-          component={UserList}
-          options={({navigation}) => {
-            return {
-              title: 'Lista de Usuários',
-              headerRight: () => (
-                <NavBtn onPress={() => navigation.navigate('UserForm')} />
-              ),
-            };
-          }}
-        />
-        <Stack.Screen
-          name="UserForm"
-          component={UserForm}
-          options={{
-            title: 'Formulário de Usuários',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UsersProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="UserList"
+          screenOptions={screenOptions}>
+          <Stack.Screen
+            name="UserList"
+            component={UserList}
+            options={({navigation}) => {
+              return {
+                title: 'Lista de Usuários',
+                headerRight: () => (
+                  <NavBtn onPress={() => navigation.navigate('UserForm')} />
+                ),
+              };
+            }}
+          />
+          <Stack.Screen
+            name="UserForm"
+            component={UserForm}
+            options={{
+              title: 'Formulário de Usuários',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UsersProvider>
   );
 }
 
